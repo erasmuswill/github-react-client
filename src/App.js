@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { Router } from "@reach/router";
 import ActivityLog from "./ActivityLog";
