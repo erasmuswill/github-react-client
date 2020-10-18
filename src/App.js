@@ -1,22 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { Router } from "@reach/router";
+import ActivityLog from "./ActivityLog";
 
 function App() {
+  const [type, setType] = useState("");
+  const [resource, setResource] = useState("");
+  const [query, setQuery] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Testing C/D</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <ActivityLog path="/:type/:resource/:query" />
+        <ActivityLog path="/:type/:resource/" />
+      </Router>
     </div>
   );
 }
