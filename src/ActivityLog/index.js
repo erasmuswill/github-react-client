@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Tabs,
-  Tab,
-  Box,
-  Heading,
-  Text,
-  TextInput,
-} from "grommet";
+import { Avatar, Tabs, Tab, Box, Heading, Text, TextInput } from "grommet";
 import Overview from "./Overview";
 import { useEffect, useMemo, useState } from "react";
 import axios from "../axios";
@@ -55,7 +47,10 @@ const ActivityLog = ({ type, resource }) => {
       .catch((error) => {
         if (error.response && error.response.status === 304)
           console.log("Not modified!");
-        else alert("Please refresh the page");
+        else {
+          clearInterval(interval);
+          alert("Please refresh the page");
+        }
       });
   };
   useEffect(() => {
@@ -66,37 +61,37 @@ const ActivityLog = ({ type, resource }) => {
   }, [type, resource]);
   return (
     <Box pad="medium" basis="medium">
-        <Box fill flex justify="center" align="center">
-          <Box pad="medium">
-            <TextInput
-              placeholder="search"
-              value={filter}
-              onChange={({ target: { value } }) => setFilter(value)}
-            />
-          </Box>
+      <Box fill flex justify="center" align="center">
+        <Box pad="medium">
+          <TextInput
+            placeholder="search"
+            value={filter}
+            onChange={({ target: { value } }) => setFilter(value)}
+          />
         </Box>
-        {data.length ? (
-          <>
-            <Box direction="row" justify="center" alignItems="center" flex>
-              <Avatar
-                size="large"
-                margin="small"
-                src={data[0].actor.avatar_url}
-              ></Avatar>
-              <Heading margin="small">{data[0].actor.display_login}</Heading>
-            </Box>
-            <Tabs>
-              <Tab title="Top Repos">
-                <Overview data={processedData} />
-              </Tab>
-              <Tab title="Details">
-                <Details data={processedData} />
-              </Tab>
-            </Tabs>
-          </>
-        ) : (
-          <Text>No content (yet)</Text>
-        )}
+      </Box>
+      {data.length && !loading ? (
+        <>
+          <Box direction="row" justify="center" alignItems="center" flex>
+            <Avatar
+              size="large"
+              margin="small"
+              src={data[0].actor.avatar_url}
+            ></Avatar>
+            <Heading margin="small">{data[0].actor.display_login}</Heading>
+          </Box>
+          <Tabs>
+            <Tab title="Top Repos">
+              <Overview data={processedData} setFilter={setFilter} />
+            </Tab>
+            <Tab title="Details">
+              <Details data={processedData} />
+            </Tab>
+          </Tabs>
+        </>
+      ) : (
+        <Text>No content (yet)</Text>
+      )}
     </Box>
   );
 };
