@@ -10,7 +10,6 @@ import {
 import Overview from "./Overview";
 import { useEffect, useMemo, useState } from "react";
 import axios from "../axios";
-import BlockUi from "react-block-ui";
 import Details from "./Details";
 import Fuse from "fuse.js";
 
@@ -67,13 +66,12 @@ const ActivityLog = ({ type, resource }) => {
   }, [type, resource]);
   return (
     <Box pad="medium" basis="medium">
-      <BlockUi loading={loading}>
         <Box fill flex justify="center" align="center">
-          <Box pad="medium" >
+          <Box pad="medium">
             <TextInput
               placeholder="search"
               value={filter}
-              onChange={({target:{value}}) => setFilter(value)}
+              onChange={({ target: { value } }) => setFilter(value)}
             />
           </Box>
         </Box>
@@ -99,7 +97,6 @@ const ActivityLog = ({ type, resource }) => {
         ) : (
           <Text>No content (yet)</Text>
         )}
-      </BlockUi>
     </Box>
   );
 };
