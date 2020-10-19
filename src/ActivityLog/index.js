@@ -1,7 +1,10 @@
+import { Tabs, Tab, Box } from "grommet";
+import Overview from "./Overview";
 import { useEffect, useState } from "react";
 import axios from "../axios";
+import BlockUi from "react-block-ui";
 
-export default ({ type, resource }) => {
+const ActivityLog = ({ type, resource }) => {
   const [data, setData] = useState([]);
   const [etag, setEtag] = useState("");
   const [loading, setLoading] = useState(true);
@@ -33,7 +36,20 @@ export default ({ type, resource }) => {
   useEffect(() => {
     if (interval) clearInterval(interval);
     fetchData();
-  }, []);
-  console.log({ type, resource });
-  return <div>Hi</div>;
+    // Disabling because this hook should only run if the input changes
+    // eslint-disable-next-line
+  }, [type, resource]);
+  return (
+    <Box pad="medium" basis="medium" flex>
+      <BlockUi loading={loading}>
+        <Tabs>
+          <Tab title="Top Repos">
+            <Overview data={data} />
+          </Tab>
+        </Tabs>
+      </BlockUi>
+    </Box>
+  );
 };
+
+export default ActivityLog;
