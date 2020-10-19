@@ -12,6 +12,7 @@
     "axios": "^0.20.0",
     "axios-hooks": "^2.1.0",
     "axios-retry": "^3.1.9",
+    "fuse.js": "^6.4.1",
     "grommet": "^2.15.2",
     "grommet-icons": "^4.5.0",
     "react": "^17.0.0-rc.2",
