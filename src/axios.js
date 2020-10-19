@@ -10,5 +10,5 @@ const useAxios = makeUseAxios({
     axios: instance
 });
 
-export default axios;
+export default instance;
 export { useAxios };
