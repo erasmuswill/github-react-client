@@ -1,4 +1,4 @@
-import { Tabs, Tab, Box } from "grommet";
+import { Avatar, Tabs, Tab, Box, Heading, DataTable, Text } from "grommet";
 import Overview from "./Overview";
 import { useEffect, useState } from "react";
 import axios from "../axios";
@@ -40,13 +40,27 @@ const ActivityLog = ({ type, resource }) => {
     // eslint-disable-next-line
   }, [type, resource]);
   return (
-    <Box pad="medium" basis="medium" flex>
+    <Box pad="medium" basis="medium">
       <BlockUi loading={loading}>
+        {data.length ? (
+          <>
+            <Box direction="row" justify="center" alignItems="center" flex>
+              <Avatar
+                size="large"
+                margin="small"
+                src={data[0].actor.avatar_url}
+              ></Avatar>
+              <Heading margin="small">{data[0].actor.display_login}</Heading>
+            </Box>
         <Tabs>
           <Tab title="Top Repos">
             <Overview data={data} />
           </Tab>
         </Tabs>
+          </>
+        ) : (
+          <Text>No content (yet)</Text>
+        )}
       </BlockUi>
     </Box>
   );
