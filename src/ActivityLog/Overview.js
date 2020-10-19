@@ -2,7 +2,7 @@ import { Box, List } from "grommet";
 import { compose, withMemo } from "@truefit/bach";
 import countBy from "underscore/modules/countBy.js";
 
-const Overview =  compose(
+const Overview = compose(
   withMemo(
     "processedData",
     ({ data }) => {
@@ -23,11 +23,7 @@ const Overview =  compose(
   )
 )(({ processedData }) => (
   <Box fill flex justify="center" align="center">
-    <Box
-      pad="medium"
-      style={{ maxWidth: "800px" }}
-    >
-      {console.table(processedData)}
+    <Box pad="medium" style={{ maxWidth: "800px" }}>
       <List
         primaryKey="count"
         secondaryKey="name"
