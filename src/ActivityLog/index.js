@@ -1,8 +1,17 @@
-import { Avatar, Tabs, Tab, Box, Heading, Text, TextInput } from "grommet";
+import {
+  Avatar,
+  Tabs,
+  Tab,
+  Box,
+  Heading,
+  Text,
+  TextInput,
+} from "grommet";
 import Overview from "./Overview";
 import { useEffect, useMemo, useState } from "react";
 import axios from "../axios";
 import BlockUi from "react-block-ui";
+import Details from "./Details";
 import Fuse from "fuse.js";
 
 const ActivityLog = ({ type, resource }) => {
@@ -60,11 +69,11 @@ const ActivityLog = ({ type, resource }) => {
     <Box pad="medium" basis="medium">
       <BlockUi loading={loading}>
         <Box fill flex justify="center" align="center">
-          <Box pad="medium">
+          <Box pad="medium" >
             <TextInput
               placeholder="search"
               value={filter}
-              onChange={({ target: { value } }) => setFilter(value)}
+              onChange={({target:{value}}) => setFilter(value)}
             />
           </Box>
         </Box>
@@ -81,6 +90,9 @@ const ActivityLog = ({ type, resource }) => {
             <Tabs>
               <Tab title="Top Repos">
                 <Overview data={processedData} />
+              </Tab>
+              <Tab title="Details">
+                <Details data={processedData} />
               </Tab>
             </Tabs>
           </>
