@@ -9,7 +9,8 @@ function App() {
   const [query, setQuery] = useState("");
   return (
     <div>
-      <Router>
+      Header with controls for input of ActivityLog variables
+      <Router basepath="/github-react-client">
         <ActivityLog path="/:type/:resource/:query" />
         <ActivityLog path="/:type/:resource/" />
       </Router>
