@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "../axios";
 import Details from "./Details";
 import Fuse from "fuse.js";
+import Likes from "./Likes";
 
 const ActivityLog = ({ type, resource }) => {
   const [data, setData] = useState([]);
@@ -22,8 +23,6 @@ const ActivityLog = ({ type, resource }) => {
   );
   const processedData = useMemo(() => {
     if (!filter) return data;
-    console.log(fuse.search(filter));
-    // return data;
     return fuse.search(filter).map(({ item }) => item);
   }, [data, fuse, filter]);
   const fetchData = () => {
@@ -61,37 +60,40 @@ const ActivityLog = ({ type, resource }) => {
   }, [type, resource]);
   return (
     <Box pad="medium" basis="medium">
-        <Box fill flex justify="center" align="center">
-          <Box pad="medium">
-            <TextInput
-              placeholder="search"
-              value={filter}
-              onChange={({ target: { value } }) => setFilter(value)}
-            />
-          </Box>
+      <Box fill flex justify="center" align="center">
+        <Box pad="medium">
+          <TextInput
+            placeholder="search"
+            value={filter}
+            onChange={({ target: { value } }) => setFilter(value)}
+          />
         </Box>
+      </Box>
       {data.length && !loading ? (
-          <>
-            <Box direction="row" justify="center" alignItems="center" flex>
-              <Avatar
-                size="large"
-                margin="small"
-                src={data[0].actor.avatar_url}
-              ></Avatar>
-              <Heading margin="small">{data[0].actor.display_login}</Heading>
-            </Box>
-            <Tabs>
-              <Tab title="Top Repos">
-                <Overview data={processedData} />
-              </Tab>
-              <Tab title="Details">
-                <Details data={processedData} />
-              </Tab>
-            </Tabs>
-          </>
-        ) : (
-          <Text>No content (yet)</Text>
-        )}
+        <>
+          <Box direction="row" justify="center" alignItems="center" flex>
+            <Avatar
+              size="large"
+              margin="small"
+              src={data[0].actor.avatar_url}
+            ></Avatar>
+            <Heading margin="small">{data[0].actor.display_login}</Heading>
+          </Box>
+          <Tabs>
+            <Tab title="Top Repos">
+              <Overview data={processedData} />
+            </Tab>
+            <Tab title="Details">
+              <Details data={processedData} />
+            </Tab>
+            <Tab title="Likes">
+              <Likes />
+            </Tab>
+          </Tabs>
+        </>
+      ) : (
+        <Text>No content (yet)</Text>
+      )}
     </Box>
   );
 };

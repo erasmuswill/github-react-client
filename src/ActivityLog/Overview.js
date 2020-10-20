@@ -24,14 +24,7 @@ const Overview = compose(
 )(({ processedData }) => (
   <Box fill flex justify="center" align="center">
     <Box pad="medium" style={{ maxWidth: "800px" }}>
-      <List
-        primaryKey="count"
-        secondaryKey="name"
-        data={processedData}
-        onClickItem={({ name, count }) => {
-          alert(name + count);
-        }}
-      />
+      <List primaryKey="count" secondaryKey="name" data={processedData} />
     </Box>
   </Box>
 ));

@@ -64,7 +64,6 @@ const getMessageNode = (event) =>
   )(event));
 
 const ActivityItem = ({ event }) => {
-  console.log(event);
   return getMessageNode(event);
 };
 
