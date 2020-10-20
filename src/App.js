@@ -4,9 +4,7 @@ import ActivityLog from "./ActivityLog";
 import { Grommet, Text, Box } from "grommet";
 
 function App() {
-  const DefaultRoute = () => (
-    <Redirect to="/github-react-client/user/erasmuswill" />
-  );
+  const DefaultRoute = () => <Redirect to="/user/erasmuswill" />;
 
   return (
     <Grommet>
@@ -15,7 +13,7 @@ function App() {
           <Text>Click items to save and unsave for later</Text>
         </Box>
       </Box>
-      <Router basepath="/github-react-client">
+      <Router>
         <ActivityLog path="/:type/:resource/" />
         <DefaultRoute default />
       </Router>

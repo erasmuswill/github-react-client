@@ -2,7 +2,7 @@
   "name": "github-react-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://erasmuswill.github.io/github-react-client",
+  "homepage": "https://cocky-montalcini-66cd95.netlify.app/",
   "dependencies": {
     "@reach/router": "^1.3.4",
     "@testing-library/jest-dom": "^5.11.4",
