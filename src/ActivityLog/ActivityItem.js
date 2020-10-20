@@ -8,7 +8,7 @@ TimeAgo.addDefaultLocale(en);
 const getMessageNode = (event) =>
   ((
     {
-      CommitCommentEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // CommitCommentEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
       CreateEvent: ({
         payload: { ref_type, ref },
         repo: { name },
@@ -29,12 +29,12 @@ const getMessageNode = (event) =>
           <ReactTimeAgo date={new Date(created_at)} />
         </Text>
       ),
-      ForkEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      GollumEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      IssueCommentEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      IssuesEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      MemberEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      PublicEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // ForkEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // GollumEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // IssueCommentEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // IssuesEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // MemberEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // PublicEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
       PullRequestEvent: ({
         payload: {
           action,
@@ -47,9 +47,9 @@ const getMessageNode = (event) =>
           <ReactTimeAgo date={new Date(created_at)} />
         </Text>
       ),
-      PullRequestReviewCommentEvent: (type) => (
-        <Text>{JSON.stringify(type)}</Text>
-      ),
+      // PullRequestReviewCommentEvent: (type) => (
+      //   <Text>{JSON.stringify(type)}</Text>
+      // ),
       PushEvent: ({ payload: { ref = "" }, repo: { name }, created_at }) => (
         <Text>
           pushed to{" "}
@@ -57,9 +57,9 @@ const getMessageNode = (event) =>
           {name} <ReactTimeAgo date={new Date(created_at)} />
         </Text>
       ),
-      ReleaseEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      SponsorshipEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
-      WatchEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // ReleaseEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // SponsorshipEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
+      // WatchEvent: (type) => <Text>{JSON.stringify(type)}</Text>,
     }[event.type] || (() => null)
   )(event));
 
