@@ -1,7 +1,7 @@
 import "./App.css";
 import { Redirect, Router } from "@reach/router";
 import ActivityLog from "./ActivityLog";
-import { Grommet } from "grommet";
+import { Grommet, Text, Box } from "grommet";
 
 function App() {
   const DefaultRoute = () => (
@@ -10,7 +10,11 @@ function App() {
 
   return (
     <Grommet>
-      Header with controls for input of ActivityLog variables
+      <Box fill flex justify="center" align="center">
+        <Box pad="medium" style={{ maxWidth: "800px" }}>
+          <Text>Click items to save and unsave for later</Text>
+        </Box>
+      </Box>
       <Router basepath="/github-react-client">
         <ActivityLog path="/:type/:resource/" />
         <DefaultRoute default />
