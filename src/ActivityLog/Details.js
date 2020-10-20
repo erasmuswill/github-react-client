@@ -8,7 +8,7 @@ const Details = compose(
   withMemo("db", () => new PouchDB("read-later"), [])
 )(({ processedData = [], db }) => (
   <Box fill flex justify="center" align="center">
-    <Box pad="medium" style={{ maxWidth: "800px" }}>
+    <Box pad="medium" style={{ maxWidth: "1000px" }}>
       <List
         primaryKey="type"
         data={processedData}

@@ -19,7 +19,7 @@ const Likes = compose(
   )
 )(({ processedData = [], setProcessedData, db, refreshFlag, startRefresh }) => (
   <Box fill flex justify="center" align="center">
-    <Box pad="medium" style={{ maxWidth: "800px" }}>
+    <Box pad="medium" style={{ maxWidth: "1000px" }}>
       {processedData && processedData.length ? (
         <List
           primaryKey="type"

@@ -92,7 +92,11 @@ const ActivityLog = ({ type, resource }) => {
           </Tabs>
         </>
       ) : (
-        <Text>No content (yet)</Text>
+        <Box fill flex justify="center" align="center">
+          <Box pad="medium" style={{ maxWidth: "800px" }}>
+            <Text>No content (yet)</Text>
+          </Box>
+        </Box>
       )}
     </Box>
   );
