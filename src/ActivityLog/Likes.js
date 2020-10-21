@@ -5,29 +5,29 @@ import { Box, List, Text } from "grommet";
 
 const Likes = compose(
   withMemo("db", () => new PouchDB("read-later"), []),
-  withState("processedData", "setProcessedData", undefined),
-  withState("refreshFlag", "startRefresh", false),
+  withState("likedItems", "setLikedItems", undefined),
+  withState("refreshFlag", "setRefreshFlag", false),
   withEffect(
-    ({ db, setProcessedData }) => {
+    ({ db, setLikedItems }) => {
       if (db)
         db.allDocs({ include_docs: true }).then((data) => {
           console.log(data);
-          setProcessedData(data.rows.map(({ doc }) => doc));
+          setLikedItems(data.rows.map(({ doc }) => doc));
         });
     },
     ["db", "refreshFlag"]
   )
-)(({ processedData = [], setProcessedData, db, refreshFlag, startRefresh }) => (
+)(({ likedItems = [], db, refreshFlag, setRefreshFlag }) => (
   <Box fill flex justify="center" align="center">
     <Box pad="medium" style={{ maxWidth: "1000px" }}>
-      {processedData && processedData.length ? (
+      {likedItems && likedItems.length ? (
         <List
           primaryKey="type"
-          data={processedData}
+          data={likedItems}
           action={(event) => <ActivityItem event={event} />}
           onClickItem={({ item }) => {
             db.remove(item);
-            startRefresh(!refreshFlag);
+            setRefreshFlag(!refreshFlag);
           }}
         />
       ) : (

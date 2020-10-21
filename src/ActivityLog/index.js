@@ -10,8 +10,9 @@ const ActivityLog = ({ type, resource }) => {
   const [data, setData] = useState([]);
   const [etag, setEtag] = useState("");
   const [loading, setLoading] = useState(true);
-  const [interval, setIntervalRef] = useState(null);
+  const [intervalRef, setIntervalRef] = useState(null); // This holds the interval return value, used for cancelling the interval
   const [filter, setFilter] = useState("");
+
   const fuse = useMemo(
     () =>
       data.length
@@ -21,21 +22,22 @@ const ActivityLog = ({ type, resource }) => {
         : { search: () => [] },
     [data]
   );
-  const processedData = useMemo(() => {
+
+  const filteredData = useMemo(() => {
     if (!filter) return data;
     return fuse.search(filter).map(({ item }) => item);
   }, [data, fuse, filter]);
+
   const fetchData = () => {
-    if (interval) clearInterval(interval);
+    if (intervalRef) clearInterval(intervalRef);
     let config = { url: "/" + type + "s/" + resource + "/events" };
-    if (etag) config = { ...config, headers: { "If-None-Match": etag } };
+    if (etag) config = { ...config, headers: { "If-None-Match": etag } }; // etag is not set on first request
     axios(config)
       .then(
         ({
           data: newData,
           headers: { etag, "x-poll-interval": poll = 60 },
         }) => {
-          console.log({ newData, poll, etag });
           setData([...newData, ...data]);
           setEtag(etag);
 
@@ -44,20 +46,31 @@ const ActivityLog = ({ type, resource }) => {
         }
       )
       .catch((error) => {
-        if (error.response && error.response.status === 304)
-          console.log("Not modified!");
+        if (error.response)
+          switch (error.response.status) {
+            case 304:
+              console.log("Not modified!");
+              break;
+            default:
+              clearInterval(intervalRef);
+              alert("Please refresh the page");
+              break;
+          }
         else {
-          clearInterval(interval);
+          clearInterval(intervalRef);
           alert("Please refresh the page");
         }
       });
-  };
+  };;
+
+  // Restarts the interval if input changes programatically
   useEffect(() => {
-    if (interval) clearInterval(interval);
+    if (intervalRef) clearInterval(intervalRef);
     fetchData();
     // Disabling because this hook should only run if the input changes
     // eslint-disable-next-line
   }, [type, resource]);
+
   return (
     <Box pad="medium" basis="medium">
       <Box fill flex justify="center" align="center">
@@ -81,10 +94,10 @@ const ActivityLog = ({ type, resource }) => {
           </Box>
           <Tabs>
             <Tab title="Top Repos">
-              <Overview data={processedData} />
+              <Overview data={filteredData} />
             </Tab>
             <Tab title="Details">
-              <Details data={processedData} />
+              <Details data={filteredData} />
             </Tab>
             <Tab title="Likes">
               <Likes />
@@ -100,6 +113,6 @@ const ActivityLog = ({ type, resource }) => {
       )}
     </Box>
   );
-};
+};;
 
 export default ActivityLog;
