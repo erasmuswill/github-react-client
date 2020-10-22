@@ -17,7 +17,7 @@ const ActivityLog = ({ type, resource }) => {
     () =>
       data.length
         ? new Fuse(data, {
-            keys: ["id", "type", "repo.name"],
+            keys: ["type", "repo.name"],
           })
         : { search: () => [] },
     [data]
