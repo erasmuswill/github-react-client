@@ -19,7 +19,7 @@
     "react": "^17.0.0-rc.2",
     "react-dom": "^17.0.0-rc.2",
     "react-scripts": "^4.0.0-next.98",
-    "react-time-ago": "^6.1.3",
+    "react-time-ago": "^6.2.1",
     "react-use-storage": "^0.4.3",
     "styled-components": "^5.2.0",
     "underscore": "^1.11.0"
