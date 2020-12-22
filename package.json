@@ -9,7 +9,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.8",
     "@truefit/bach": "^2.0.9",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "axios-hooks": "^2.1.0",
     "axios-retry": "^3.1.9",
     "fuse.js": "^6.4.1",
